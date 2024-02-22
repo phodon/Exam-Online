@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+    </head>
+    <body>
+        <div>
+            <form method="POST" action="{% url 'add' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                </br>
+            <button type="submit">Add Record</button>
+            </form>
+        </div>
+        
+
+
+    </body>
+</html>

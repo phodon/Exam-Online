@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static 'main.css' %}">
+    </head>
+    <body>
+        {% if detail_record %}
+            <strong>Full Name: </strong>{{detail_record.first_name}} {{detail_record.last_name}}</br>
+            <strong>Email: </strong>{{detail_record.email}}</br>
+            <strong>Phonr Number: </strong>{{detail_record.phone}}</br>
+            <strong>Address: </strong>{{detail_record.address}}</br>
+            <strong>City: </strong>{{detail_record.city}}</br>
+            <strong>State: </strong>{{detail_record.state}}</br>
+            <strong>ZipCode: </strong>{{detail_record.zipcode}}</br>
+            <strong>Created At: </strong>{{detail_record.created_at}}</br>
+        {% endif %}
+        <button onclick="window.location.href = '{% url 'home' %}'">Back</button>
+        <button onclick="window.location.href = '{% url 'delete' detail_record.id %}' ">Delete</button>
+        <button onclick="window.location.href = '{% url 'update' detail_record.id %}' ">Update</button>
+    </body>
+</html>

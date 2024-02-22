@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+
+<body>
+    <div>
+        {% if messages %}
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        {% endif %}
+        {% if user.is_authenticated %}
+        <h1>Hello Word</h1>
+        <table class="table__records">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>ZipCode</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if records %}
+                    {% for record in records %}
+                        <tr>
+                            <td><a href="{% url 'detail' record.id %}">{{ record.id }}</a></td>
+                            <td>{{record.first_name}}</td>
+                            <td>{{record.last_name}}</td>
+                            <td>{{record.email}}</td>
+                            <td>{{record.phone}}</td>
+                            <td>{{record.address}}</td>
+                            <td>{{record.city}}</td>
+                            <td>{{record.state}}</td>
+                            <td>{{record.zipcode}}</td>
+                            <td>{{record.created_at}}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'add' %}">Add Record</a>
+        {% else %}
+        <h1>Login</h1>
+        <form method="POST" action="{% url 'home' %}">
+            {% csrf_token %}
+            <div class="login__infor">
+                <input type="text" class="login__infor--detail" name="username" placeholder="Username" required>
+            </div>
+            <br>
+            <div class="login__infor">
+                <input type="text" class="login__infor--detail" name="password" placeholder="PassWord" required>
+            </div>
+            <br>
+            <button type="submit" class="login__button">Login</button>
+            <a href="{% url 'register' %}">Register</a>
+        </form>
+        {% endif %}
+    </div>
+</body>
+
+</html>
